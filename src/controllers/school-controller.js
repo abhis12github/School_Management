@@ -9,27 +9,27 @@ const create = async (req, res) => {
         //validations for the data sent by the user.
 
         if (!name || !address || latitude === undefined || longitude === undefined) {
-            throw new Error("Data Missing ! Please provide name, address, latitude and longitude of the school");
+            throw { error: "Data Missing ! Please provide name, address, latitude and longitude of the school" };
         }
 
         if (typeof name !== 'string' || typeof address !== 'string') {
-            throw new Error("Invalid data type! Name and address must be strings.");
+            throw { error: "Invalid data type! Name and address must be strings." };
         }
 
         const lat = parseFloat(latitude);
         const long = parseFloat(longitude);
 
         if (isNaN(lat) || isNaN(long)) {
-            throw new Error("Invalid data type! Latitude and longitude must be numbers.");
+            throw { error: "Invalid data type! Latitude and longitude must be numbers." };
         }
 
 
         if (lat < -90 || lat > 90) {
-            throw new Error("Latitude can only be in the range -90 to +90");
+            throw { error: "Latitude can only be in the range -90 to +90" };
         }
 
         if (long < -180 || long > 180) {
-            throw new Error("Longitude can only be in the range -180 to +180");
+            throw { error: "Longitude can only be in the range -180 to +180" };
         }
 
         //Gather the school data.
@@ -47,7 +47,7 @@ const create = async (req, res) => {
             data: school,
             message: "Successfully created a new school.",
             success: true,
-            error: {} 
+            error: {}
         });
 
     } catch (error) {
@@ -70,22 +70,22 @@ const getAll = async (req, res) => {
 
         //validations for data sent by the user.
         if (latitude === undefined || longitude === undefined) {
-            throw new Error("Data Missing ! Please provide latitude and longitude of your location.");
+            throw { error: "Data Missing ! Please provide latitude and longitude of your location." };
         }
 
         const lat = parseFloat(latitude);
         const long = parseFloat(longitude);
 
         if (isNaN(lat) || isNaN(long)) {
-            throw new Error("Invalid data type! Latitude and longitude must be numbers.");
+            throw { error: "Invalid data type! Latitude and longitude must be numbers." };
         }
 
         if (lat < -90 || lat > 90) {
-            throw new Error("Latitude can only be in the range -90 to +90");
+            throw { error: "Latitude can only be in the range -90 to +90" };
         }
 
         if (long < -180 || long > 180) {
-            throw new Error("Longitude can only be in the range -180 to +180");
+            throw { error: "Longitude can only be in the range -180 to +180" };
         }
 
         //Gather the user data.
