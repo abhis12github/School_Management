@@ -40,6 +40,12 @@ const create = async (req, res) => {
             longitude: long
         }
 
+        // check if the school with the same name and address exists.
+        const existingSchool=await schoolService.getOneSchool(name,address);
+        if(existingSchool){
+            throw {error:"Duplicate Entry! A school with the same name, address already exists."}
+        }
+
         //create new schoool.
         const school = await schoolService.createSchool(schoolData);
 

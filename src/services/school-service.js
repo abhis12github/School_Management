@@ -1,24 +1,24 @@
-const SchoolRepository=require("../repository/school-repository");
-const {calculateDistance}=require("../utils/coordinates-distance");
+const SchoolRepository = require("../repository/school-repository");
+const { calculateDistance } = require("../utils/coordinates-distance");
 
-class SchoolService{
-    constructor(){
-        this.schoolRepository=new SchoolRepository();
+class SchoolService {
+    constructor() {
+        this.schoolRepository = new SchoolRepository();
     }
 
-    async createSchool(data){
+    async createSchool(data) {
         try {
-            const school=await this.schoolRepository.createSchool(data);
+            const school = await this.schoolRepository.createSchool(data);
             return school;
         } catch (error) {
             console.log("Something went wrong in the school service layer");
-            throw {error};
-        }   
+            throw { error };
+        }
     }
 
-    async getAllSchools(coordinates){
+    async getAllSchools(coordinates) {
         try {
-            const schools=await this.schoolRepository.getAllSchools();
+            const schools = await this.schoolRepository.getAllSchools();
 
             const sortedSchools = schools.sort((schoolA, schoolB) => {
                 const distanceA = calculateDistance(coordinates.latitude, coordinates.longitude, schoolA.latitude, schoolA.longitude);
@@ -30,9 +30,19 @@ class SchoolService{
 
         } catch (error) {
             console.log("Something went wrong in the school service layer");
-            throw {error};    
+            throw { error };
         }
     }
+
+    async getOneSchool(name, address){
+        try {
+            const school = await this.schoolRepository.getOneSchool(name, address);
+            return school;
+        } catch (error) {
+            throw error;
+        }
+    };
+
 }
 
-module.exports=SchoolService;
+module.exports = SchoolService;
