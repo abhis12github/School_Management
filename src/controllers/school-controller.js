@@ -47,7 +47,7 @@ const create = async (req, res) => {
             data: school,
             message: "Successfully created a new school.",
             success: true,
-            error: {}
+            error: {} 
         });
 
     } catch (error) {
@@ -56,7 +56,7 @@ const create = async (req, res) => {
             data: {},
             message: "Failed to create a new school.",
             success: false,
-            error: error
+            error: error || error.message
         });
 
     }
@@ -110,7 +110,7 @@ const getAll = async (req, res) => {
             data: {},
             message: "Failed to fetch the schools in sorted order of distance",
             success: false,
-            error: error
+            error: error || error.message
         });
 
     }

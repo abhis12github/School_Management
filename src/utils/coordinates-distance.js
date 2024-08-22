@@ -12,6 +12,9 @@ function calculateDistance(latitude1, longitude1, latitude2, longitude2) {
         Math.sin(longitudeDiff / 2) * Math.sin(longitudeDiff / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = radius * c;
+
+    console.log(`Distance between (${latitude1}, ${longitude1}) and (${latitude2}, ${longitude2}) is ${distance} km`);
+    
     return distance;
 }
 
