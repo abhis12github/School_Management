@@ -8,7 +8,7 @@ const ApiRoutes = require("./routes/index");
 const db = require("./models/index");
 const { DB_SYNC } = require("./config/serverConfig");
 
-if (DB_SYNC) {
+if (DB_SYNC==="true") {
     db.sequelize.sync({ alter: true });
 }
 
